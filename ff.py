@@ -1,29 +1,31 @@
-from flask import Flask
+from flask import Flask, render_template
+
 app = Flask(__name__)
 
-@app.route('/user/<username>')
-    def show_userprofile():
-        return 'Hello, %s' % username
 
-@app.route('/user/<username>/<int:playlist_id>')
-    def show_userplaylist(username, playlistid):
-        return 'Users playlist'
+@app.route('/')
+def login_page():
+    return render_template('login.html')
 
-@app.route('/user/<username>/recomendations')
-    def show_userrecomendations(username):
-        return 'Users recomendations'
 
-@app.route('/playlist/<int:playlist_id>')
-    def show_playlist(playlist_id):
-        return 'Playlist'
+@app.route('/main/')
+def main_page():
 
-@app.route('/song/<int:song_id>')
-    def song(song_id):
-        return 'Song page'
+    return render_template('main_page.html')
+
+
+@app.route('/<username>/')
+def show_userprofile(username):
+    #user_n = str(username).lower()
+    user_data = db.get_user(username)
+    return render_template('playlists.html', user=user_data)
+
+
+
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
 
 
 
