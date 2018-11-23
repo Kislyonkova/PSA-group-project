@@ -1,7 +1,6 @@
 import sqlite3
 conn = sqlite3.connect('my.sqlite')
 c = conn.cursor()
-c.execute('''ALTER TABLE users RENAME COLUMN id to userid''')
 def add_user(username,userpass):
     c.execute("INSERT INTO users (name,password) VALUES ('%s','%s')"%(username,userpass))
     conn.commit()
