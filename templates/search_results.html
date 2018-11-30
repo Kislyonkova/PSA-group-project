@@ -11,16 +11,31 @@
     <h1>You searched for {{q}}</h1>
     <hr>
 
-    {% for user in users %}
+    <!--{% for user in users %}
     <div class="card">
         <div class="card-body">
             <a href="/users/{{user.login}}">{{user.name}}</a>
             <p>{{user.job}}</p>
         </div>
     </div>
+    {% endfor %}-->
 
-
+    {% for user in users %}
+    <!-- 1-name; 2-password; 3-email; 4-photo-->
+    <div class="card">
+        <div class="card-body">
+            <img class="card-img-top" alt="2nd card" style="height: 100px; width: 100px"
+                 src="https://github.com/Kislyonkova/PSA-group-project/blob/master/images/songs_playlists/-7YRDIiKTjA.jpg?raw=true">
+            <div class="card-block">
+                <h5 class="card-title">
+                    Name: {{user[1]}}
+                </h5>
+                <h6 class="card-subtitle mb-2 text-muted">
+                    Email: {{user[3]}}
+                </h6>
+            </div>
+        </div>
+    </div>
     {% endfor %}
-</div>
 </body>
 </html>
