@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>friends.fm</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body>
+{% if user_created %}
+<div class="alert alert-success">User Created</div>
+{% elif error_message == "user_exists" %}
+<div class="alert alert-danger"> User with this login already exists</div>
+{% endif %}
+
+<div class="container">
+    <h1>Create an account</h1>
+    <form method="post" action="/add_user/">
+        <div class="form-group">
+            <label>Login</label>
+            <input class="form-control" type="text" name="login" required>
+
+            <label>Name</label>
+            <input class="form-control" type="text" name="name" required>
+
+            <label>Email</label>
+            <input class="form-control" type="text" name="email" required>
+
+            <label>Password</label>
+            <input type="password" class="form-control" name="password" placeholder="Password">
+
+            <label>Photo</label>
+            <input class="form-control" type="url" name="photo">
+        </div>
+        <button type="submit" class="btn btn-success">Add user</button>
+    </form>
+</div>
+</body>
+</html>

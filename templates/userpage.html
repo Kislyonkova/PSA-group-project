@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>friends.fm</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body>
+{% if not user %}
+<div class="alert alert-warning">User not found</div>
+{% endif %}
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-sm">
+            <div class="card">
+                <img src="{%if user.photo%}
+            {{user.photo}}
+            {%else%}
+            https://img.huffingtonpost.com/asset/5b7fdeab1900001d035028dc.jpeg?cache=sixpwrbb1s&ops=1910_1000
+            {%endif%}"
+                     class="card-img-top" style="">
+            </div>
+        </div>
+        <div class="col-sm" style="font-family: 'Roboto Light' ">
+            <h1>{{user.name}}</h1>
+            <h2>Email: {{user.email}}</h2>
+            <p>Password: {{user.password}}</p>
+            <p>Photo: {{user.photo}}</p>
+            <p>login: {{user.login}}</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
