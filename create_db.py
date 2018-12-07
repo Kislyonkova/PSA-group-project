@@ -1,15 +1,17 @@
 import sqlite3
 
-conn = sqlite3.connect('app.db')
+conn = sqlite3.connect('app_db.db')
 
 c = conn.cursor()
 
 c.execute('''
 CREATE TABLE users_data (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    login TEXT,
     name TEXT,
     password TEXT,
-    email TEXT
+    email TEXT,
+    photo TEXT
 )
 ''')
 conn.commit()
@@ -120,7 +122,7 @@ CREATE TABLE playlists_info (
     playlist_title TEXT,
     description TEXT,
     hashtags TEXT,
-    author_id INTEGER,
+    author_login INTEGER,
     photo TEXT 
 )
 ''')
@@ -128,34 +130,35 @@ conn.commit()
 
 playlists = [
     {'playlist_id': '1',
-     'playlist_title': 'test',
+     'playlist_title': 'November Sadness',
      'description': 'desc',
-     'hashtags': '#HELP',
-     'author_id': '1',
-     'photo': 'link'},
+     'hashtags': '#pop, #electronic #sad',
+     'author_login': 'liza',
+     'photo': 'https://raw.githubusercontent.com/Kislyonkova/PSA-group-project/master/images/songs_playlists/-7YRDIiKTjA.jpg'},
 
     {'playlist_id': '2',
-     'playlist_title': 'test2',
+     'playlist_title': 'Morning inspiration',
      'description': 'desc2',
-     'hashtags': '#HELP #PLS',
-     'author_id': '1',
-     'photo': 'link'}
+     'hashtags': '#pop #happy #morning #hits ',
+     'author_login': 'alya',
+     'photo': 'https://raw.githubusercontent.com/Kislyonkova/PSA-group-project/master/images/songs_playlists/morning.jpg'}
 ]
 for playlist in playlists:
     c.execute("INSERT INTO playlists_info"
-              "(playlist_id, playlist_title, description, hashtags, author_id, photo)"
+              "(playlist_id, playlist_title, description, hashtags, author_login, photo)"
               "VALUES "
               "('{playlist_id}', '{playlist_title}', '{description}', "
-              "'{hashtags}', '{author_id}', '{photo}')".format(**playlist))
+              "'{hashtags}', '{author_login}', '{photo}')".format(**playlist))
     conn.commit()
 
 # SONGS
 c.execute('''
-CREATE TABLE songs_info (
+CREATE TABLE songs_db (
     song_id INTEGER PRIMARY KEY AUTOINCREMENT,
     artist TEXT,
     title TEXT,
-    genre TEXT)
+    genre TEXT,
+    photo TEXT)
 ''')
 conn.commit()
 
@@ -163,19 +166,21 @@ songs = [
     {'song_id': '1',
      'artist': 'Son Lux',
      'title': 'Lost It to Trying',
-     'genre': 'test_genre'},
+     'genre': 'test_genre',
+     'photo': 'https://raw.githubusercontent.com/Kislyonkova/PSA-group-project/master/images/songs_playlists/sonlux.jpg'},
 
     {'song_id': '2',
      'artist': 'Монеточка',
      'title': 'Нет монет',
-     'genre': 'test_genre_2'}
+     'genre': 'test_genre_2',
+     'photo': 'https://raw.githubusercontent.com/Kislyonkova/PSA-group-project/master/images/songs_playlists/monetochka.jpg'}
 ]
 
 for song in songs:
-    c.execute("INSERT INTO songs_info"
-              "(song_id, artist, title, genre)"
+    c.execute("INSERT INTO songs_db"
+              "(song_id, artist, title, genre, photo)"
               "VALUES "
-              "('song_id', 'artist', 'title', 'genre')".format(**song))
+              "('{song_id}', '{artist}', '{title}', '{genre}', '{photo}')".format(**song))
     conn.commit()
 
 # PLAYLISTS & SONGS
@@ -185,7 +190,7 @@ CREATE TABLE playlists (
     playlist_id INTEGER,
     song_id INTEGER,
     FOREIGN KEY(playlist_id) REFERENCES playlists_info(playlist_id),
-    FOREIGN KEY(song_id) REFERENCES songs_info(song_id)
+    FOREIGN KEY(song_id) REFERENCES songs_db(song_id)
 )
 ''')
 conn.commit()
