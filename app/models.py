@@ -11,6 +11,7 @@ class User(db.Model):
     password_hash = db.Column(db.String(128))
     name = db.Column(db.String(120), nullable=False)
     photo = db.Column(db.String(2000))
+    about = db.Column(db.String(500), default='https://data.whicdn.com/images/239575122/original.jpg')
 
     def __repr__(self):
         return '<User {}>'.format(self.login)

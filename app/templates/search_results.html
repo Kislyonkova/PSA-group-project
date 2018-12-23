@@ -4,26 +4,26 @@
 {% block title %} Search {% endblock %}
 {% block content %}
 
-    <div class="container-fluis">
-
-        <h1>You searched for {{ q }}</h1>
-        <hr>
-        {% for user in users %}
-            <!-- 1-name; 2-password; 3-email; 4-photo-->
-            <div class="card">
-                <div class="card-body">
-                    <img class="card-img-top" alt="2nd card" style="height: 100px; width: 100px"
-                         src="https://github.com/Kislyonkova/PSA-group-project/blob/master/images/songs_playlists/-7YRDIiKTjA.jpg?raw=true">
-
-                    <div class="card-block">
-                        <h5 class="card-title">
-                            Name: {{ user[1] }}
-                        </h5>
-                        <h6 class="card-subtitle mb-2 text-muted">
-                            Email: {{ user[3] }}
-                        </h6>
-                    </div>
+    <div class="container-fluid">
+    <!-- 1-name; 3-email; 4-photo-->
+    <h1>You searched for {{ q }}</h1>
+    <hr>
+    {% for user in users %}
+        <div class="row" style="margin-bottom: 35px; padding: auto">
+            <div class="col-sm-2" id="pic" style="margin-left: 20px; margin-top: 10px">
+                <div class="card">
+                    <img src="{{ user[5] }}"
+                         class="card-img-top" style="">
                 </div>
             </div>
-        {% endfor %}
+            <div class="col-sm" style="font-family: 'Roboto Light'; margin-top: 10px">
+                <h3 class="card-title">{{ user[4] }}</h3>
+                <h6 class="card-subtitle mb-2 text-muted">
+                    Email: {{ user[6] }}
+                </h6>
+            </div>
+        </div>
+
+        <div class="dropdown-divider"></div>
+    {% endfor %}
 {% endblock %}

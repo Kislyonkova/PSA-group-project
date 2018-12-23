@@ -30,11 +30,10 @@ def search():
     conn = sqlite3.connect('app.db')
     c = conn.cursor()
     q = request.args.get('query')
-    c.execute("SELECT * FROM users_data where name LIKE '%{q}%' OR  login LIKE '%{q}%' ".format(q=q))
+    c.execute("SELECT * FROM main.users_data WHERE name LIKE '%{q}%' OR  login LIKE '%{q}%' ".format(q=q))
     users = list(c.fetchall())
     # songs = db.get_song(q)
     return render_template('search_results.html', q=q, users=users)
-
 
 
 @app.route('/user/<login>/')
@@ -46,7 +45,7 @@ def user_page(login):
     conn.row_factory = dict_factory
     c = conn.cursor()
 
-    c.execute("SELECT * FROM users_data WHERE login='%s'" % login)
+    c.execute("SELECT * FROM main.users_data WHERE login='%s'" % login)
     user_data = c.fetchone()
     conn.close()
     return render_template('user.html', user=user_data)
