@@ -1,0 +1,41 @@
+{% extends "index.html" %}
+
+<!-- Playlist page -->
+{% block title %} Profile {% endblock %}
+
+{% block content %}
+    <div class="col-md-10">
+        <!--Playlist info-->
+        <label for="profile-info-block">
+            <h3 style="font-family: 'Roboto Light' ">
+                <a href="/">
+                    <span class="fas fa-angle-left"></span>
+                </a>
+            </h3>
+        </label>
+        <div class="row" style="margin-bottom: 35px">
+            <div class="col-sm-4" id="profile-info-block">
+                <div class="card">
+                    <img src="{% if user.photo %}
+                              {{ user.photo }}
+                    {% else %}
+                        https://data.whicdn.com/images/239575122/original.jpg
+                    {% endif %}"
+                         class="card-img-top" style="">
+                </div>
+            </div>
+            <div class="col-sm" style="font-family: 'Roboto Light' ">
+                <h3>{{ user.name }}</h3>
+                <p> About: {{ user.description }}</p>
+            </div>
+        </div>
+        <!--End of playlist info-->
+
+        <div class="dropdown-divider"></div>
+        <!--Playlist content-->
+
+        <!--End of playlist content-->
+
+    </div>
+
+{% endblock %}
