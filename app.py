@@ -20,7 +20,7 @@ def main_for_now():
     # users = list(c.fetchall())
     # conn.close()
     # return render_template('index.html', users=users)
-    return render_template('index.html')
+    return render_template('recs.html')  # DO NOT FORGET TO CHANGE LATER
 
 
 @app.route('/search/')
@@ -122,8 +122,13 @@ def user_page(login):
     c.execute("SELECT * FROM users_data WHERE login='%s'" % login)
     user_data = c.fetchone()
     conn.close()
-    return render_template('userpage.html', user=user_data)
+    return render_template('user.html', user=user_data)
+
+
+@app.route('/test/')
+def test_page():
+    return render_template('user.html')
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug= True)
