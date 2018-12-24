@@ -21,11 +21,13 @@ class Playlist(db.Model):
     """
     Класс для плейлистов
     """
-    id = db.Column(db.Integer, primary_key=True)
+    pid = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(120), nullable=False)
-    about = db.Column(db.String(140))
+    about = db.Column(db.String(240))
     cover = db.Column(db.String(), default="")
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))  # ссылается на пользователей из базы users
+    name = db.Column(db.String(120), db.ForeignKey('user.name'))
+    hashtags = db.Column(db.String(120), nullable=False)
 
     def __repr__(self):
         return '<Playlist {}>'.format(self.body)

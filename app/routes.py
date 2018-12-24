@@ -51,6 +51,21 @@ def user_page(login):
     return render_template('user.html', user=user_data)
 
 
+@app.route('/playlist/<pid>')
+def playlist_page(pid):
+    """Playlist page"""
+    conn = sqlite3.connect('app.db')
+    conn.row_factory = dict_factory
+    c = conn.cursor()
+
+    c.execute("SELECT * FROM main.playlists WHERE pid='%s'" % pid)
+    playlist_data = c.fetchone()
+    conn.close()
+    return render_template('playlist.html', playlist=playlist_data)
+
+
+
+
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
     form = LoginForm()

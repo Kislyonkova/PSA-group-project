@@ -4,38 +4,178 @@
 {% block title %} Profile {% endblock %}
 
 {% block content %}
-    <div class="col-md-10">
-        <!--Playlist info-->
-        <label for="profile-info-block">
-            <h3 style="font-family: 'Roboto Light' ">
-                <a href="/">
-                    <span class="fas fa-angle-left"></span>
-                </a>
-            </h3>
-        </label>
-        <div class="row" style="margin-bottom: 35px">
-            <div class="col-sm-4" id="profile-info-block">
-                <div class="card">
-                    <img src="{% if user.photo %}
-                              {{ user.photo }}
-                    {% else %}
-                        https://data.whicdn.com/images/239575122/original.jpg
-                    {% endif %}"
-                         class="card-img-top" style="">
+    {% if not playlist %}
+        <div class="alert alert-warning">Playlist not found :c</div>
+    {% endif %}
+    {% if playlist %}
+        <div class="col-md-10">
+            <!--Playlist info-->
+            <label for="playlist-info-block">
+                <h3 style="font-family: 'Roboto Light' ">
+                    <a href="/">
+                        <span class="fas fa-angle-left"></span>
+                    </a>
+                </h3>
+            </label>
+            <div class="row" style="margin-bottom: 35px">
+                <div class="col-sm-3" id="playlist-info-block" style="margin-left: 20px; margin-top: 10px">
+                    <div class="card">
+                        <img src="{{ playlist.cover }}"
+                             class="card-img-top" style="">
+                    </div>
+                </div>
+                <div class="col-sm-7" style="font-family: 'Roboto Light'; margin: 20px">
+                    <h3>{{ playlist.title }}</h3>
+                    <h6>by {{ playlist.name }}</h6>
+                    <p> {{ playlist.about_p }}</p>
                 </div>
             </div>
-            <div class="col-sm" style="font-family: 'Roboto Light' ">
-                <h3>{{ user.name }}</h3>
-                <p> About: {{ user.description }}</p>
+            <!--End of playlist info-->
+
+            <div class="dropdown-divider"></div>
+
+
+            <!--Playlist content-->
+            <div class="row" style="margin: 20px">
+                <div class="col-md-10" style="margin-top: 20px">
+                    <label for="pl-cnt-block">
+                        <h5 style="font-family: 'Roboto Light' ">
+                            Songs
+                        </h5>
+                    </label>
+                    <div class="row" id="pl-cnt-block">
+                        <!-- 1st song -->
+                        <div class="col-md-12">
+                            <div class="row" style="margin-top: 20px">
+                                <!-- Cover -->
+                                <div class="col-sm-2">
+                                    <img class="card-img-top" alt="1st song" style="height: 40px; width: 40px"
+                                         src="https://github.com/Kislyonkova/PSA-group-project/blob/master/images/songs_playlists/onuka.jpg?raw=true">
+                                </div>
+                                <!-- Author & title -->
+                                <div class="col-sm-3"
+                                     style="font-family: 'Roboto Light'; font-size: 13px; margin-left: 13px">
+                                    <div class="row">
+                                        Vidlik
+                                    </div>
+                                    <div class="row">
+                                        Onuka
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <!--тут пусто-->
+                                </div>
+                                <!-- Length, buttons -->
+                                <div class="col-sm-1">
+                                    <a href="#">
+                                        <span class="fas fa-plus"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 1st song END-->
+                    </div>
+                    <div class="row">
+                        <!-- Second song -->
+                        <div class="col-md-12">
+                            <div class="row" style="margin-top: 25px">
+                                <!-- Cover -->
+                                <div class="col-sm-2">
+                                    <img class="card-img-top" alt="1st song" style="height: 40px; width: 40px"
+                                         src="https://github.com/Kislyonkova/PSA-group-project/blob/master/images/songs_playlists/sonlux.jpg?raw=true">
+                                </div>
+                                <!-- Author & title -->
+                                <div class="col-sm-3"
+                                     style="font-family: 'Roboto Light'; font-size: 13px; margin-left: 13px">
+                                    <div class="row">
+                                        Lost It to Trying
+                                    </div>
+                                    <div class="row">
+                                        Son Lux
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <!--тут пусто-->
+                                </div>
+                                <!-- Length, buttons -->
+                                <div class="col-sm-1">
+                                    <a href="#">
+                                        <span class="fas fa-plus"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Second song END-->
+                    </div>
+                    <div class="row">
+                        <!-- Third song -->
+                        <div class="col-md-12">
+                            <div class="row" style="margin-top: 25px">
+                                <!-- Cover -->
+                                <div class="col-sm-2">
+                                    <img class="card-img-top" alt="1st song" style="height: 40px; width: 40px"
+                                         src="https://github.com/Kislyonkova/PSA-group-project/blob/master/images/songs_playlists/alla_1.jpg?raw=true">
+                                </div>
+                                <!-- Author & title -->
+                                <div class="col-sm-3"
+                                     style="font-family: 'Roboto Light'; font-size: 13px; margin-left: 13px">
+                                    <div class="row">
+                                        Не отрекаются любя
+                                    </div>
+                                    <div class="row">
+                                        Алла Пугачева
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <!--тут пусто-->
+                                </div>
+                                <!-- Length, buttons -->
+                                <div class="col-sm-1">
+                                    <a href="#">
+                                        <span class="fas fa-plus"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Third song END-->
+                    </div>
+                    <div class="row">
+                        <!-- Fourth song -->
+                        <div class="col-md-12">
+                            <div class="row" style="margin-top: 25px">
+                                <!-- Cover -->
+                                <div class="col-sm-2">
+                                    <img class="card-img-top" alt="1st song" style="height: 40px; width: 40px"
+                                         src="https://upload.wikimedia.org/wikipedia/ru/8/85/%D0%A0%D0%B0%D1%81%D0%BA%D1%80%D0%B0%D1%81%D0%BA%D0%B8_%D0%B4%D0%BB%D1%8F_%D0%B2%D0%B7%D1%80%D0%BE%D1%81%D0%BB%D1%8B%D1%85.jpg">
+                                </div>
+                                <!-- Author & title -->
+                                <div class="col-sm-3"
+                                     style="font-family: 'Roboto Light'; font-size: 13px; margin-left: 13px">
+                                    <div class="row">
+                                        Нет монет
+                                    </div>
+                                    <div class="row">
+                                        Монеточка
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <!--тут пусто-->
+                                </div>
+                                <!-- Length, buttons -->
+                                <div class="col-sm-1">
+                                    <a href="#">
+                                        <span class="fas fa-plus"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Fourth song END-->
+                    </div>
+                </div>
             </div>
+
+            <!--End of playlist content-->
+
         </div>
-        <!--End of playlist info-->
-
-        <div class="dropdown-divider"></div>
-        <!--Playlist content-->
-
-        <!--End of playlist content-->
-
-    </div>
-
+    {% endif %}
 {% endblock %}
