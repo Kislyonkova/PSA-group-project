@@ -33,7 +33,22 @@ def search():
     c.execute("SELECT * FROM main.users_data WHERE name LIKE '%{q}%' OR  login LIKE '%{q}%' ".format(q=q))
     users = list(c.fetchall())
     # songs = db.get_song(q)
+    c.close()
     return render_template('search_results.html', q=q, users=users)
+
+
+@app.route('/playlists/')
+def playlist():
+    """
+    Shows list of all available playlists
+    """
+    conn = sqlite3.connect('app.db')
+    c = conn.cursor()
+    c.execute("SELECT * FROM main.playlists")
+    playlists = list(c.fetchall())
+    c.close()
+    return render_template('playlists_full.html', playlists=playlists)
+
 
 
 @app.route('/user/<login>/')

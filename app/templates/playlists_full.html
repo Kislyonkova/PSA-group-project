@@ -1,0 +1,42 @@
+{% extends "index.html" %}
+
+<!-- Playlists results page -->
+{% block title %} Playlists {% endblock %}
+{% block content %}
+
+    <div class="container-fluid">
+    <label for="cards-block">
+        <h3 style="font-family: 'Roboto Light' ">
+            <a href="/">
+                <span class="fas fa-angle-left"></span>
+            </a>
+            Playlists
+        </h3>
+    </label>
+    <hr>
+    {% for playlist in playlists %}
+        <div class="row" style="margin-bottom: 35px; padding: auto">
+            <div class="col-sm-2" id="pic" style="margin-left: 20px; margin-top: 10px">
+                <div class="card">
+                    <img src="{{ playlist[3] }}"
+                         class="card-img-top" style="">
+                </div>
+            </div>
+            <div class="col-sm" style="font-family: 'Roboto Light'; margin-top: 10px">
+                <h4 class="card-title">
+                    <a href="/playlist/{{ playlist[0] }}"> {{ playlist[1] }}</a>
+                </h4>
+                <h7 class="card-subtitle text-muted" style="margin-top: 5px">
+                    by <a href="/user/{{ playlist[4] }}"> {{ playlist[5] }}</a>
+                </h7>
+                <p style="margin-top: 10px">{{ playlist[2] }}</p>
+            </div>
+        </div>
+
+        <div class="dropdown-divider"></div>
+    {% endfor %}
+
+
+
+
+{% endblock %}
