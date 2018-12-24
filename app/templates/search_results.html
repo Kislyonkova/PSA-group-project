@@ -3,10 +3,14 @@
 <!-- Search results page -->
 {% block title %} Search {% endblock %}
 {% block content %}
-
-    <div class="container-fluid">
     <h1>You searched for {{ q }}</h1>
     <hr>
+
+
+    <div class="container-fluid">
+    {% if not users %}
+        <div class="alert alert-warning">Nothing found. Are you sure that it exists? We're not</div>
+    {% endif %}
     {% for user in users %}
         <div class="row" style="margin-bottom: 35px; padding: auto">
             <div class="col-sm-2" id="pic" style="margin-left: 20px; margin-top: 10px">

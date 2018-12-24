@@ -1,7 +1,9 @@
-from app import db
+from app import db, login
+from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     """
     Класс для пользователей
     """
@@ -14,7 +16,18 @@ class User(db.Model):
     about = db.Column(db.String(500), default='https://data.whicdn.com/images/239575122/original.jpg')
 
     def __repr__(self):
-        return '<User {}>'.format(self.login)
+        return '<User {}, {}>'.format(self.login, self.name)
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
 
 
 class Playlist(db.Model):
@@ -25,8 +38,8 @@ class Playlist(db.Model):
     title = db.Column(db.String(120), nullable=False)
     about = db.Column(db.String(240))
     cover = db.Column(db.String(), default="")
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))  # ссылается на пользователей из базы users
-    name = db.Column(db.String(120), db.ForeignKey('user.name'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users_data.id'))  # ссылается на пользователей из базы users_data
+    name = db.Column(db.String(120), db.ForeignKey('users_data.name'))
     hashtags = db.Column(db.String(120), nullable=False)
 
     def __repr__(self):
