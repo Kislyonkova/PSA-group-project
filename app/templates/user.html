@@ -7,152 +7,96 @@
     {% if not user %}
         <div class="alert alert-warning">User not found</div>
     {% endif %}
-{% if user %}
-    <div class="col-md-10">
-        <!--Profile info-->
-        <label for="profile-info-block">
-            <h3 style="font-family: 'Roboto Light' ">
-                <a href="/">
-                    <span class="fas fa-angle-left"></span>
-                </a>
-            </h3>
-        </label>
-        <div class="row" style="margin-bottom: 35px; padding: auto">
+    {% if user %}
+        <div class="col-md-10">
+            <!--Profile info-->
+            <label for="profile-info-block">
+                <h3 style="font-family: 'Roboto Light' ">
+                    <a href="/">
+                        <span class="fas fa-angle-left"></span>
+                    </a>
+                </h3>
+            </label>
+            <div class="row" style="margin-bottom: 35px; padding: auto">
 
-            <div class="col-sm-3" id="profile-info-block" style="margin-left: 20px; margin-top: 10px">
-                <div class="card">
-                    <img src="{% if user.photo %}
+                <div class="col-sm-3" id="profile-info-block" style="margin-left: 20px; margin-top: 10px">
+                    <div class="card">
+                        <img src="{% if user.photo %}
                               {{ user.photo }}
                     {% else %}
                         https://data.whicdn.com/images/239575122/original.jpg
                     {% endif %}"
-                         class="card-img-top" style="">
+                             class="card-img-top" style="">
+                    </div>
+                </div>
+                <div class="col-sm" style="font-family: 'Roboto Light'; margin-top: 10px">
+                    <h3>{{ user.name }}</h3>
+                    <p> About: {{ user.about }}</p>
                 </div>
             </div>
-            <div class="col-sm" style="font-family: 'Roboto Light'; margin-top: 10px">
-                <h3>{{ user.name }}</h3>
-                <p> About: {{ user.about }}</p>
-            </div>
-        </div>
 
-        <div class="dropdown-divider"></div>
+            <div class="dropdown-divider"></div>
 
 
-        <!-- MINI PLAYLIST AND WALL BLOCK -->
-        <div class="row" style="margin: 20px">
-            <div class="col-md-6" style="margin-top: 20px">
-                <label for="friends-block">
-                    <h5 style="font-family: 'Roboto Light' ">
-                        Playlists
-                    </h5>
-                </label>
-                <!--playlists START-->
-                <div class="row" id="friends-block">
-                    <!-- PLAYLIST // FIRST -->
-                    <div class="col-md-12">
-                        <div class="row" style="margin-top: 20px">
-                            <!-- Cover -->
-                            <div class="col-sm-4">
-                                <img class="card-img-top" alt="1st song" style="height: 100px; width: 100px"
-                                     src="https://github.com/Kislyonkova/PSA-group-project/blob/master/images/songs_playlists/onuka.jpg?raw=true">
-                            </div>
-                            <!-- Author & title -->
-                            <div class="col-sm-4"
-                                 style="font-family: 'Roboto Light'; font-size: 13px; margin-left: 13px">
-                                <div class="row">
-                                    <b>November Sadness</b>
+            <!-- MINI PLAYLIST AND WALL BLOCK -->
+            <div class="row" style="margin: 20px">
+                <div class="col-md-6" style="margin-top: 20px">
+                    <label for="friends-block">
+                        <h5 style="font-family: 'Roboto Light' ">
+                            Playlists
+                        </h5>
+                    </label>
+                    <!--playlists START-->
+                    <!-- PLAYLIST // -->
+                    {% for playlist in playlists %}
+                        <div class="row" id="friends-block">
+                            <div class="col-md-12">
+                                <div class="row" style="margin-top: 20px">
+                                    <!-- Cover -->
+                                    <div class="col-sm-4">
+                                        <img class="card-img-top" style="height: 100px; width: 100px"
+                                             src="{{ playlist.cover }}">
+                                    </div>
+                                    <!-- Author & title -->
+                                    <div class="col-sm-4"
+                                         style="font-family: 'Roboto Light'; font-size: 13px; margin-left: 13px">
+                                        <div class="row">
+                                            <b><a href="/playlist/{{ playlist.pid }}">{{ playlist.title }}</a></b>
+                                        </div>
+                                        <div class="row">
+                                            <p>by  <a href="/user/{{ playlist.login }}"> {{ playlist.name }}</a></p>
+                                        </div>
+                                    </div>
+                                    <!-- Length, buttons -->
+                                    <div class="col-sm-3" style="align-items: left;">
+                                        <a href="#">
+                                            <span class="fas fa-plus"></span>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="row">
-                                    Liza Voronova
-                                </div>
                             </div>
-                            <!-- Length, buttons -->
-                            <div class="col-sm-3" style="align-items: left;">
-                                <a href="#">
-                                    <span class="fas fa-plus"></span>
-                                </a>
-                            </div>
+
                         </div>
-                    </div>
-                    <!-- 1st song END-->
-                </div>
-                <div class="row" id="friends-block">
-                    <!-- PLAYLIST // FIRST -->
-                    <div class="col-md-12">
-                        <div class="row" style="margin-top: 20px">
-                            <!-- Cover -->
-                            <div class="col-sm-4">
-                                <img class="card-img-top" alt="1st song" style="height: 100px; width: 100px"
-                                     src="https://github.com/Kislyonkova/PSA-group-project/blob/master/images/songs_playlists/onuka.jpg?raw=true">
-                            </div>
-                            <!-- Author & title -->
-                            <div class="col-sm-4"
-                                 style="font-family: 'Roboto Light'; font-size: 13px; margin-left: 13px">
-                                <div class="row">
-                                    <b>November Sadness</b>
-                                </div>
-                                <div class="row">
-                                    Liza Voronova
-                                </div>
-                            </div>
-                            <!-- Length, buttons -->
-                            <div class="col-sm-3" style="align-items: left;">
-                                <a href="#">
-                                    <span class="fas fa-plus"></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 1st song END-->
-                </div>
-                <div class="row" id="friends-block">
-                    <!-- PLAYLIST // FIRST -->
-                    <div class="col-md-12">
-                        <div class="row" style="margin-top: 20px">
-                            <!-- Cover -->
-                            <div class="col-sm-4">
-                                <img class="card-img-top" alt="1st song" style="height: 100px; width: 100px"
-                                     src="https://github.com/Kislyonkova/PSA-group-project/blob/master/images/songs_playlists/onuka.jpg?raw=true">
-                            </div>
-                            <!-- Author & title -->
-                            <div class="col-sm-4"
-                                 style="font-family: 'Roboto Light'; font-size: 13px; margin-left: 13px">
-                                <div class="row">
-                                    <b>November Sadness</b>
-                                </div>
-                                <div class="row">
-                                    Liza Voronova
-                                </div>
-                            </div>
-                            <!-- Length, buttons -->
-                            <div class="col-sm-3" style="align-items: left;">
-                                <a href="#">
-                                    <span class="fas fa-plus"></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 1st song END-->
-                </div>
+                    {% endfor %}
 
-            </div>
-            <!-- END of Friend's section-->
+                </div>
+                <!-- END of Friend's section-->
 
-            <!-- Wall block -->
-            <div class="col-md-4" style="margin-top: 20px">
-                <label for="wall-block"><h5 style="font-family: 'Roboto Light' ">Wall</h5></label>
-                <div class="row" id="wall-block">
-                    <div class="card" style="border: none; display: block; margin-left: auto; margin-right: auto">
-                        <h5> Oops! Nothing there yet. </h5>
-                        <img class="card-img-top" alt="2nd card" style="height: 100px; width: 100px;
+                <!-- Wall block -->
+                <div class="col-md-4" style="margin-top: 20px">
+                    <label for="wall-block"><h5 style="font-family: 'Roboto Light' ">Wall</h5></label>
+                    <div class="row" id="wall-block">
+                        <div class="card" style="border: none; display: block; margin-left: auto; margin-right: auto">
+                            <h5> Oops! Nothing there yet. </h5>
+                            <img class="card-img-top" alt="2nd card" style="height: 100px; width: 100px;
                         display: block; margin-left: auto; margin-right: auto"
-                             src="https://sun9-20.userapi.com/c850016/v850016551/72de4/pptPmRFVHNk.png">
+                                 src="https://sun9-20.userapi.com/c850016/v850016551/72de4/pptPmRFVHNk.png">
+                        </div>
                     </div>
                 </div>
             </div>
+
+
         </div>
-
-
-    </div>
-{% endif %}
+    {% endif %}
 {% endblock %}

@@ -98,11 +98,13 @@ def user_page(login):
     conn = sqlite3.connect('app.db')
     conn.row_factory = dict_factory
     c = conn.cursor()
-
     c.execute("SELECT * FROM main.user WHERE login='%s'" % login)
     user_data = c.fetchone()
+    c = conn.cursor()
+    c.execute("SELECT * FROM main.playlists")
+    playlist_data = c.fetchmany(3)  # show only three
     conn.close()
-    return render_template('user.html', user=user_data)
+    return render_template('user.html', user=user_data, playlists=playlist_data)
 
 
 @app.route('/playlist/<pid>')
